@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>AgriFlow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">AgriFlow</label>
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="content">
+            <h1>The Precision Agriculture</h1>
+            <p>Experience the future of farming with Precision Agriculture, combining technology and tradition for
+                maximum efficiency and sustainability</p>
+            <a href="data.html" class="button">Get The Data</a>
+        </div>
+    </section>
+    <!-- data section -->
+    <div class="team-section">
+        <h1>Sensor Readings</h1>
+    </div>
+    <div class="outer-data-container">
+        <div class="data-container">
+            <img src="./images/moisture.jpg" alt="Field 1">
+            <h3>Soil Moisture</h3>
+            <div id="field1" class="data-box">Loading...</div>
+        </div>
+
+        <div class="data-container">
+            <img src="./images/Blue-humidity-icon.jpg" alt="Field 2">
+            <h3>Humidity</h3>
+            <div id="field2" class="data-box">Loading...</div>
+        </div>
+
+        <div class="data-container">
+            <img src="./images/weather-thermometer.jpg" alt="Field 3">
+            <h2>Temperature</h2>
+            <div id="field3" class="data-box">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        function fetchDataAndDisplay() {
+            const channelID = '2420288';
+            const apiKey = 'Y0HC9BD5VNHYY0OU';
+            const apiUrl = `https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${apiKey}&results=1`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! Status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    displayLatestData(result.feeds[0]);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        function displayLatestData(data) {
+            document.getElementById('field1').textContent = data.field1;
+            document.getElementById('field2').textContent = data.field2;
+            document.getElementById('field3').textContent = data.field3;
+        }
+
+        fetchDataAndDisplay();
+    </script>
+    <!-- /data section -->
+    <!-- about us -->
+    <!-- <div id="about-us">
+        <div class="about-us-content">
+            <h1>About Us</h1>
+            <p>AgriFlow is committed to revolutionizing agriculture through the use of cutting-edge technology. Our
+                mission is to improve efficiency and sustainability in farming practices by leveraging data-driven
+                insights and precision agriculture techniques.</p>
+            <div class="video-container">
+                
+                <iframe width="560" height="315" src="your-video-url" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- /about us -->
+
+    <!-- team section -->
+    <div class="team">
+        <div class="team-section">
+            <h1>Our Team</h1>
+        </div>
+        <div class="team-section-box">
+            <!-- Column 1-->
+            <div class="column">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="./images/anil_image.jpg" />
+                    </div>
+                    <h3>Balaka Anil</h3>
+                    <div class="icons">
+                        <a href="https://www.linkedin.com/in/anil05/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Anilbalaka" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Column 2-->
+            <div class="column">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="./images/shyam_image.jpg" />
+                    </div>
+                    <h3>Y.Shyam</h3>
+                    <div class="icons">
+                        <a href="#">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Column 3-->
+            <div class="column">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="./images/siddhu_image.jpg" />
+                    </div>
+                    <h3>G.Siddartha</h3>
+                    <div class="icons">
+                        <a href="#">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Column 2-->
+            <div class="column">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="./images/pawan_image.jpg" />
+                    </div>
+                    <h3>B.Pawan Rao</h3>
+                    <div class="icons">
+                        <a href="#">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /team section -->
+    <!-- contact section -->
+    <div class="contact-section" id="contact-section">
+        <div class="contact-details" style="width: 40%;">
+            <h2>Have something in your mind?</h2>
+            <p>We'd love to hear from you ! <br>Whether you have questions about our project or just want to say hello,
+                don't
+                hesitate to reach out to us. Simply fill out the form below, and we'll get back to you as soon as
+                possible .</p>
+        </div>
+        <div class="container">
+            <div class="col-tact-stye-one col-lg-7">
+                <div class="contact-form-style-one">
+
+                    <h4 class="sub-title">Have Questions?</h4>
+                    <h2 class="title">Send us a Message</h2>
+                    <div id="preloader1" class="preloader1"></div>
+                    <form
+                        action="https://script.google.com/macros/s/AKfycbyFAYek8HYwzbceKTgQO75zNxMpuf5M5eXdIPJzKzSGpFd0RH9BqPHkBELBhzWKmCWeCA/exec"
+                        class="contact-form contact-form" id="sheet">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input class="form-control v1" id="name" name="Name" placeholder="Name"
+                                        type="text" />
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input class="form-control v2" id="email" name="Email" placeholder="Email*"
+                                        type="email" />
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input class="form-control v3" id="phone" name="Phone" placeholder="Phone"
+                                        type="text" />
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group comments">
+                                    <textarea class="form-control v4" id="comments" name="Message"
+                                        placeholder="Tell Us About Yourself *"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" name="submit" id="submit">
+                                    <i class="fa fa-paper-plane"></i> Get in Touch
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script>
+                        var form = document.getElementById("sheet");
+                        var select = document.querySelector(".v1");
+                        var select2 = document.querySelector(".v2");
+                        var select3 = document.querySelector(".v3");
+                        var select4 = document.querySelector(".v4");
+                        var preloader1 = document.getElementById("preloader1");
+
+                        form.addEventListener("submit", (e) => {
+                            e.preventDefault();
+
+                            if (!select.value || !select2.value || !select3.value || !select4.value) {
+                                window.alert("Please fill out all the fields before submitting.");
+                                return;
+                            }
+
+
+                            preloader1.style.display = "block";
+
+                            fetch(form.action, {
+                                method: "POST",
+                                body: new FormData(document.getElementById("sheet")),
+                            })
+                                .then((response) => response.json())
+                                .then(() => {
+
+                                    preloader1.style.display = "none";
+
+                                    select.value = "";
+                                    select2.value = "";
+                                    select3.value = "";
+                                    select4.value = "";
+                                    window.alert("Thank you for reaching out! We'll get back to you shortly.");
+                                });
+                        });
+
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of contact section -->
+
+
+
+</body>
+
+</html>

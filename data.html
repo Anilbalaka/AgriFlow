@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+QEr5dCZdJ2tQ6zba57Vs5tmIuPq2z+2W+Jgux2rsX0x2rj" crossorigin="anonymous">
+
+    <title>Sensor Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        #all-data-component {
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .loading {
+            display: block;
+            margin: 20px auto;
+            font-size: 18px;
+        }
+
+        .error {
+            color: red;
+            font-size: 18px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        #submit {
+            background-color: #FE6B00;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #submit:hover {
+            background-color: white;
+            color: #FE6B00;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-box a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .back-box:hover a {
+            color: #FE6B00;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="all-data-component"></div>
+
+    <script>
+        // Define your component function
+        function fetchData() {
+            // Replace YOUR_CHANNEL_ID and YOUR_READ_API_KEY with your ThingSpeak channel ID and read API key
+            const channelID = '2420288';
+            const apiKey = 'Y0HC9BD5VNHYY0OU';
+            const apiUrl = `https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! Status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    renderData(result.feeds);
+                })
+                .catch(error => {
+                    renderError(error.message);
+                });
+        }
+
+        function renderData(allData) {
+            // Slice the array to get only the latest 10 entries
+            const latestData = allData.slice(-15);
+
+            const table = document.createElement('table');
+            table.className = 'data-table';
+
+            const thead = document.createElement('thead');
+            const trHead = document.createElement('tr');
+            ['S.NO', 'Soil Moisture', 'Humidity', 'Temperature', 'Created At', 'Time'].forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                trHead.appendChild(th);
+            });
+            thead.appendChild(trHead);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            latestData.reverse().forEach((entry, index) => {
+                const formattedDateTime = formatDateTime(entry.created_at);
+                const tr = document.createElement('tr');
+                // Serial Number
+                const tdSerial = document.createElement('td');
+                tdSerial.textContent = index + 1;
+                tr.appendChild(tdSerial);
+                // Other Data
+                ['field1', 'field2', 'field3', 'formattedDate', 'formattedTime'].forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = value === 'field1' || value === 'field2' || value === 'field3' ? entry[value] : formattedDateTime[value];
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            document.getElementById('all-data-component').innerHTML = '';
+            document.getElementById('all-data-component').appendChild(table);
+        }
+
+
+        function renderError(errorMessage) {
+            document.getElementById('all-data-component').innerHTML = '<p class="error">Error: ' + errorMessage + '</p>';
+        }
+
+        function formatDateTime(dateTimeString) {
+            const dateTime = new Date(dateTimeString);
+            const formattedDate = dateTime.toLocaleDateString();
+            const formattedTime = dateTime.toLocaleTimeString();
+            return { formattedDate, formattedTime };
+        }
+
+        fetchData();
+    </script>
+    <div class="row">
+        <div class="back-box">
+            <button type="submit" name="submit" id="submit">
+                <a href="index.html">Go Back</a>
+            </button>
+
+        </div>
+    </div>
+</body>
+
+</html>
