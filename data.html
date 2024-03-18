@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-KyZXEAg3QhqLMpG8r+QEr5dCZdJ2tQ6zba57Vs5tmIuPq2z+2W+Jgux2rsX0x2rj" crossorigin="anonymous">
 
@@ -101,11 +102,13 @@
 </head>
 
 <body>
+    <div id="preloader1" class="preloader1"></div>
     <div id="all-data-component"></div>
 
     <script>
         // Define your component function
         function fetchData() {
+            document.getElementById('preloader1').style.display = 'flex';
             // Replace YOUR_CHANNEL_ID and YOUR_READ_API_KEY with your ThingSpeak channel ID and read API key
             const channelID = '2420288';
             const apiKey = 'Y0HC9BD5VNHYY0OU';
@@ -163,6 +166,7 @@
 
             document.getElementById('all-data-component').innerHTML = '';
             document.getElementById('all-data-component').appendChild(table);
+            document.getElementById('preloader1').style.display = 'none';
         }
 
 
