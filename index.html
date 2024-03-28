@@ -24,9 +24,9 @@
             <i class="fas fa-bars"></i>
         </label>
         <label class="logo">AgriFlow</label>
-        <ul>
-            <li><a class="active" href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+        <ul id="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about-us">About</a></li>
             <li><a href="#contact-section">Contact</a></li>
         </ul>
     </nav>
@@ -119,15 +119,18 @@
         <div class="info-block objectives">
             <h2 class="block-title">Objectives</h2>
             <p class="block-content">Our goals involve creating a Smart Farming Decision Support System to transform
-                agricultural practices. We aim to boost farming efficiency by using IoT technology and data analysis,
-                optimize resource management through precise environmental monitoring, and promote sustainability by
-                reducing chemical usage and water waste.</p>
-            <p>1.Efficient Water Level Control: Monitor and control tank water levels using sensors and a solenoid valve
-                to prevent overflow and optimize water usage.
-                2.Remote Monitoring and Management: Enable remote access to water level data and system control via an
-                OLED display for convenient monitoring and management from anywhere.
-                3.User-Friendly Interface: Design an intuitive interface with clear visual feedback on water levels and
-                system status to simplify user interaction and enhance usability.</p>
+                agricultural practices. .</p>
+
+            <ul class="list-circle secondary mt-20">
+                <li>Efficient Water Level Control: Monitor and control tank water levels using sensors and a solenoid
+                    valve
+                    to prevent overflow and optimize waterusage.</li>
+                <li>Remote Monitoring and Management: Enable remote access to water level data and system control via an
+                    OLED display for convenient monitoring and management from anywhere.</li>
+                <li>User-Friendly Interface: Design an intuitive interface with clear visual feedback on water levels
+                    and
+                    system status to simplify user interaction and enhance usability.</li>
+            </ul>
         </div>
         <div class="info-block what-we-do">
             <h2 class="block-title">What We Do</h2>
@@ -275,6 +278,7 @@
                         </div>
                     </form>
 
+
                     <script>
                         var form = document.getElementById("sheet");
                         var select = document.querySelector(".v1");
@@ -314,11 +318,25 @@
 
 
                     </script>
+
                 </div>
             </div>
         </div>
     </div>
+
     <!-- end of contact section -->
+    <script>
+        const links = document.querySelectorAll('#navigation a');
+        links.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                links.forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
 
 
 
