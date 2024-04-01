@@ -289,8 +289,18 @@ section {
     display: none;
   }
   .content h1{
-    font-size: 20px !important;
+    font-size: 15px !important;
+    margin-left: 5px;
   }
+  .about-us-content p span{
+    display: none;
+
+  }
+  .about-us-content h1, .team-section h1{
+    font-size: 2rem !important;
+
+  }
+  
 }
 .content {
   width:500px;
@@ -384,8 +394,8 @@ section {
 }
 @media (max-width:600px){
   .team-section-box{
-  flex-direction: column;
-  align-items: center;
+  overflow:scroll;
+
   }
 
 }
@@ -396,8 +406,12 @@ section {
 @media (max-width:600px)
 {
   .column{
-    margin-bottom: 20px;
+    margin:20px;
   }
+  .block-content span{
+    display: none;
+  }
+
 }
  .team-section h1 {
   width: 100%;
@@ -414,6 +428,7 @@ section {
   transition: 0.3s;
   background-color: #ffffff;
   width: 200px;
+  height: 380px;
 }
 .card .img-container {
   display: flex;
@@ -527,13 +542,13 @@ section {
 }
 
 .about-us-content {
-  max-width: 800px;
+  max-width: 90%;
   margin: 0 auto;
   text-align: center;
 }
 
 .about-us-content h1 {
-  font-size: 2em;
+  font-size: 3.5em;
   margin-bottom: 20px;
 }
 
@@ -621,3 +636,24 @@ section {
 	border-radius: 50%;
 	top: 12px;
 }
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

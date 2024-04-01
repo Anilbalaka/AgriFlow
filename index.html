@@ -25,12 +25,12 @@
         </label>
         <label class="logo">AgriFlow</label>
         <ul id="navigation">
-            <li><a href="#">Home</a></li>
+            <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about-us">About</a></li>
             <li><a href="#contact-section">Contact</a></li>
         </ul>
     </nav>
-    <section>
+    <section id="home">
         <div class="content">
             <h1>The Precision Agriculture</h1>
             <p>Experience the future of farming with Precision Agriculture, combining technology and tradition for
@@ -40,7 +40,7 @@
     </section>
     <!-- data section -->
     <div class="team-section">
-        <h1>Sensor Readings</h1>
+        <h1>Field Analytics</h1>
     </div>
     <div class="outer-data-container">
         <div class="data-container">
@@ -84,9 +84,9 @@
         }
 
         function displayLatestData(data) {
-            document.getElementById('field1').textContent = data.field1;
-            document.getElementById('field2').textContent = data.field2;
-            document.getElementById('field3').textContent = data.field3;
+            document.getElementById('field1').textContent = `${data.field1} %`;
+            document.getElementById('field2').textContent = `${data.field2} %`;
+            document.getElementById('field3').textContent = `${data.field3} °C`;
         }
 
         fetchDataAndDisplay();
@@ -96,12 +96,11 @@
     <div id="about-us">
         <div class="about-us-content">
             <h1>About Us</h1>
-            <p>AgriFlow is committed to revolutionizing agriculture through the use of cutting-edge technology. Our
-                mission is to improve efficiency and sustainability in farming practices by leveraging data-driven
-                insights and precision agriculture techniques.</p>
+            <p> AgriFlow is dedicated to modernizing agriculture through innovative technology. <span>Our
+                    mission is to improve efficiency and sustainability in farming practices by leveraging data-driven
+                    insights and precision agriculture techniques.</span></p>
             <div class="video-container">
-
-                <iframe width="560" height="315" src="/images/html.mp4" frameborder="0" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="/images/html.mp4" frameborder="0" allowfullscreen muted></iframe>
             </div>
         </div>
     </div>
@@ -109,9 +108,11 @@
     <div class="content-wrapper">
         <div class="info-block challenges">
             <h2 class="block-title">Challenges</h2>
-            <p class="block-content">In modern agriculture, the challenge lies in efficiently using resources while
-                ensuring sustainable crop production. Traditional farming methods often struggle to adapt to changing
-                environmental conditions, leading to inefficiencies and environmental harm. Our challenge is to develop
+            <p class="block-content"> <span> In modern agriculture, the challenge lies in efficiently using resources
+                    while
+                    ensuring sustainable crop production. Traditional farming methods often struggle to adapt to
+                    changing
+                    environmental conditions, leading to inefficiencies and environmental harm. </span> Our challenge is to develop
                 innovative solutions that help farmers maximize yields while minimizing resource use and environmental
                 impact. Precision agriculture emerges as our solution, offering a data-driven approach to optimize
                 farming practices and address these challenges.</p>
@@ -123,13 +124,11 @@
 
             <ul class="list-circle secondary mt-20">
                 <li>Efficient Water Level Control: Monitor and control tank water levels using sensors and a solenoid
-                    valve
-                    to prevent overflow and optimize waterusage.</li>
+                    valve to prevent overflow and optimize waterusage.</li>
                 <li>Remote Monitoring and Management: Enable remote access to water level data and system control via an
-                    OLED display for convenient monitoring and management from anywhere.</li>
+                    OLED display for convenient monitoring and management from anywhere.</li>
                 <li>User-Friendly Interface: Design an intuitive interface with clear visual feedback on water levels
-                    and
-                    system status to simplify user interaction and enhance usability.</li>
+                    and system status to simplify user interaction and enhance usability.</li>
             </ul>
         </div>
         <div class="info-block what-we-do">
@@ -171,7 +170,7 @@
                     </div>
                     <h3>Y.Shyam</h3>
                     <div class="icons">
-                        <a href="#">
+                        <a href="https://www.linkedin.com/in/yerninti-shyam-249630251">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="#">
@@ -188,7 +187,8 @@
                     </div>
                     <h3>G.Siddartha</h3>
                     <div class="icons">
-                        <a href="#">
+                        <a
+                            href="https://www.linkedin.com/in/sid-g-664906259?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="#">
@@ -205,7 +205,7 @@
                     </div>
                     <h3>B.Pawan Rao</h3>
                     <div class="icons">
-                        <a href="#">
+                        <a href="https://www.linkedin.com/in/pawan-rao-5bb232235">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="#">
@@ -323,13 +323,12 @@
             </div>
         </div>
     </div>
-
     <!-- end of contact section -->
+
     <script>
         const links = document.querySelectorAll('#navigation a');
         links.forEach(link => {
             link.addEventListener('click', function (event) {
-                event.preventDefault();
                 links.forEach(link => {
                     link.classList.remove('active');
                 });
@@ -337,6 +336,15 @@
             });
         });
     </script>
+    <script>
+        window.addEventListener('load', function () {
+            var video = document.querySelector('iframe');
+            video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        });
+    </script>
+
+
+
 
 
 
